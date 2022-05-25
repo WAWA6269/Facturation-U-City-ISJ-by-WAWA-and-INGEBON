@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)file:///C:/Users/HP/Desktop/Facturev3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript">
+		function Calcul_Electricity() {
+	var form = window.document.calc_1;
+
+//GESTION DU CALCUL D'EAU
+
+	var Ni = Number(form.Ni.value); //Ancien index
+	var Ai = Number(form.Ai.value);//Nouvel index
+
+	if(Ni<0 || Ai<0){
+		if (Ni<0) {
+			alert("Valeur invalide du nouvel index");
+		}
+		if (Ai<0) {
+			alert("Valeur invalide de l'ancien index");
+		}
+	}
+	else{
+
+
+	var sky_1 = 30; // 30 kw free
+	var tax_1 = 200; // 200 fcfa / kW after sky
+
+	variation_index = Ni - Ai ;
+
+	variation_index = Math.abs(variation_index);
+
+	conso_1 = variation_index - sky_1; // consommation payante( taxed consomation)
+	// sky depend of eau(water) & courant(electricity)
+
+	if (conso_1 <= 0 ){
+
+		result_1 = 0 ;
+
+	}
+	else{
+
+		result_1 = conso_1*tax_1; //payant dès un certain seuil/ You buy after a ceil
+
+	}
+
+	console.log("Consommation d'electricité: "+result_1);
+
+	form.elec.value = result_1;
+	}
+
+}
+
+//GESTION DE LA FACTURE D'EAU
+function Calcul_Water() {
+
+	var form_2 = window.document.calc_2;
+
+
+	var init  = Number(form_2.init.value); //Ancien index
+	var final = Number(form_2.final.value);//Nouvel index
+
+	if(init<0 || final<0){
+		if (init<0) {
+			alert("Valeur invalide du nouvel index");
+		}
+		if (final<0) {
+			alert("Valeur invalide de l'ancien index");
+		}
+	}
+	else{
+
+	var sky_2 = 5; // 5 mètre cube d'eau gratuit
+	var tax_2 = 400; // 400 fcfa / mètre cube after sky
+
+	variation_index_2 = init - final ;
+
+	variation_index_2 = Math.abs(variation_index_2);
+
+	conso_2 = variation_index_2 - sky_2; // consommation payante( taxed consomation)
+	// sky depend of eau(water) & courant(electricity)
+
+	if (conso_2 <= 0 ){
+
+		result_2 = 0;
+
+	}
+	else{
+
+		result_2 = conso_2*tax_2; //payant dès un certain seuil/ You buy after a ceil
+
+	}
+
+	form_2.eau.value = result_2;
+	
+	console.log("Consommation d'eau: "+result_2);
+}
+
+	
+}
+	
+	</script>
+	<style type="text/css">
+		*{
+	margin: 0px;
+	padding: 0;
+}
+
+body {
+	background: url("isj.jpeg") no-repeat center center fixed;
+	background-size: cover;
+
+}
+html::after{
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        height: 302%;
+        width: 117%;
+        background: rgba(0, 0, 151, 0.25);
+        background-size: cover;
+    }
+.container{
+	border-left: 2px solid maroon;
+	color: black;
+	position: relative;
+	max-width: 360px;
+	width: 100%;
+	border-radius: 10px;
+	box-shadow: -1px 4px 50px 0px rgba(0, 0, 0, 0.75);
+	display: inline-block;
+    transform: translate(6%, 0%);
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.75);
+   
+}
+
+.container .water, .elect{
+	padding: 30px;
+}
+
+/*.container {
+	padding: 30px;
+}*/
+.container h3::before{
+	content: '';
+	position: relative;
+	left: 0;
+	bottom: 0;
+	height: 3px;
+	width: 30px;
+	background-color: #4070f4;
+	border-radius: 25px;
+
+}
+
+h3{
+	position: relative;
+	font-size: 30px;
+	font-weight: 600;
+	width: 76%;
+	/*border-bottom: 5px solid blue;
+	margin-bottom: 4px;
+	padding: 8px 0;
+	color: black;*/
+}
+.water h3{
+	width: 55%;
+}
+
+.box1, .box2, .box3, .box4, .box5, .box6 {
+	/*width: 70%;
+	border-bottom: 2px solid indigo;
+	margin-left: 10px;*/
+	position: relative;
+	margin-top: 30px;
+	width: 100%;
+	height: 50px;
+} 
+
+.box1 input, .box2 input, .box3 input, .box4 input, .box5 input, .box6 input {
+	height: 40%;
+	width: 60%;
+	background: none;
+	background-size: cover;/*
+	color: black;
+	margin: 2px 23px;*/
+	font-size: 20 )px;
+	border: none;
+	outline: none;
+	
+	text-align: center ;
+	padding: 0px 35px;
+	border-bottom: 2px solid black;
+	border-top: 2px solid transparent;
+	transition: all 0.3s ease;
+
+}
+
+.box1 input:focus, 
+.box2 input:focus, 
+.box3 input:focus, 
+.box4 input:focus, 
+.box5 input:focus, 
+.box6 input:focus{
+	border-bottom-color: #4070f4;
+}
+
+.btn_1, .btn_2{
+	cursor: pointer;
+	outline: none;
+	width: 50%;
+	margin: 12px 0;
+	padding: 6px;
+	border: 3px solid ;
+	border-radius: 10px;
+	background: none;
+}
+
+.btn_1:hover, .btn_2:hover{
+	color: green;
+	background: pink;
+}
+.banana{
+	position: absolute;
+	left: 6%;
+	top: 140%;
+	z-index: 250;
+    background: rgba(255, 255, 255, 0.75);
+
+}
+	</style>
+	<title>Facture</title>
+</head>
+<body>
+	<h2><font color="red"><marquee>Evaluons aisément nos consommations mensuelles !!!</marquee></font></h2>
+
+		<div class="container" style="width: 360px;">
+
+			<form method="post" name="calc_1" action="file:///C:/Users/HP/Desktop/SEMESTRE%202/Projet%20semestre%202%202022/Project%20facturation%20cit%C3%A9%20U%20ISJ/ExoProgrammation/Calcul%20des%20factures/projet.html#" onsubmit="Calcul_Electricity()">
+					
+					<div class="elect" style="width: 370px;">
+
+						<h3>Facture de lumiere</h3>
+
+							<div class="box1">
+								Nouvel index : <input type="positif number" name="Ni" class="new1">
+							</div>
+
+
+							<div class="box2">
+								Ancien index :  <input type="positif number" name="Ai" class="last1">
+							</div>
+ 
+
+							<div class="box3">
+								Consommation : <input type="text" name="elec" class="conso1" disabled="off">
+							</div>
+						
+							<input type="button" value="Montant à payer ce mois" onclick="Calcul_Electricity()" class="btn_1">
+							
+
+					</div>
+			</form>
+			<form method="post" name="calc_2" action="file:///C:/Users/HP/Desktop/SEMESTRE%202/Projet%20semestre%202%202022/Project%20facturation%20cit%C3%A9%20U%20ISJ/ExoProgrammation/Calcul%20des%20factures/projet.html#" onsubmit="Calcul_Water()">
+					<div class="water" style="width: 370px;">
+
+						<h3>Facture d'eau</h3>
+
+							<div class="box4">
+								Nouvel index : <input type="number" name="init" class="new2">
+							</div>
+
+							<div class="box5">	
+								Ancien index : <input type="number" name="final" class="last2">
+							</div>
+							
+							<div class="box6">
+								Consommation : <input type="text" name="eau" class="conso2" disabled="off">
+							</div>
+							<input type="button" value="Montant à payer ce mois" onclick="Calcul_Water()" class="btn_2">
+
+					</div>				
+			</form>
+
+		</div>
+		<div class="banana">A PLATFORM BY WAWA & INGENIEUR
+		</div>
+
+
+</body></html>
